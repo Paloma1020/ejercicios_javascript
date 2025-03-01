@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            padding-top: 10px;
+        }
+        #titulo{
+            color: green;
+            background-color: yellow;
+            border: 2px solid green;
+            font-size: 5em;
+            text-align: center;
+            height: 100px;
+        }
+
+        #fondo{
+            width: 100%;
+            height: 100px;
+            background-color: red;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <h2>Ejercicio 1</h2>
+    <!--3. Ejercicio 1-->
+    <button onclick="comparar()">Comparar</button>
+    <!--4. Ejercicio 1-->
+    <button onclick="semana()">Semana</button>
+
+
+    <!-------------------------------------------------------------->
+
+
+    <!--5. Ejercicio 2-->
+    <h2>Ejercicio 2</h2>
+    <div>
+        <h1 id="titulo"> </h1>
+        <p>
+            <button onclick="styleNombre()">Nombre</button>
+            <button style="visibility: hidden;" onclick="cambiarColor()" name="rojo" id="rojo">Añade un poco de color</button>
+        </p>
+    </div>
+
+    <!--7. Ejercicio 2-->
+    <div>
+        <form action="">
+            <label for="color">Color: </label>
+            <select name="color" id="color" onchange="selectColor()">
+                <option value="red" selected>Rojo</option>
+                <option value="green">Verde</option>
+                <option value="yellow">Amarillo</option>
+                <option value="blue">Azul</option>
+            </select>
+        
+            <div id="fondo"></div>
+        </form>
+    </div>
+
+
+    <!-------------------------------------------------------------->
+
+
+    <!--11. Ejercicio 3-->
+    <h2>Ejercicio 3</h2>
+    <div>
+    <form action="" onsubmit="return validarFormulario()">
+        <p>
+            <label for="nombre">Nombre: </label>
+            <input type="text" name="nombre" id="nombre">
+        </p>
+        <p>
+            <label for="edad">Edad: </label>
+            <input type="number" name="edad" id="edad">
+        </p>
+        <p>
+            <label for="importe">Importe: </label>
+            <input type="number" name="importe" id="importe">
+        </p>
+
+        <label for="situacionLaboral">Situación Laboral: </label>
+        <select name="situacion" id="situacion">
+            <option value="noseleccionado" selected>Seleccionar...</option>
+            <option value="act">Activo</option>
+            <option value="des">Desempleado</option>
+            <option value="jub">Jubilado</option>
+        </select>
+        <p> 
+            <input type="submit">
+        </p>
+    </form>
+        <h3 id="aviso"></h3>
+    </div>
+
+
+
+    <script type="text/javascript"> 
+        // 3. Ejercicio 1
+        function comparar(){
+            var nombre1=prompt("Dime tu nombre");
+            let edad1=prompt("Dime tu edad");
+            
+            var nombre2=prompt("Dime tu nombre");
+            let edad2=prompt("Dime tu edad");
+
+            if(edad1>edad2){
+            mensaje= nombre1 + " es mayor que " + nombre2;
+            }else if (edad1<edad2){
+                mensaje= nombre1 + " es menor que " + nombre2;
+            }else if(edad1=edad2){
+                mensaje= nombre1 + " es igual que " + nombre2;
+            } 
+            alert(mensaje);
+            
+        }
+        
+        // 4. Ejercicio 1
+        function semana(){
+            let posicion=parseInt(prompt("Dime el día de la semana del 1-7: "));
+            var semana=['no exite','Lunes','Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+            if( posicion >=1 && posicion <=7){
+                alert(semana[posicion]);  
+            } else{
+                alert("Solamente puede elegir del 1-7")
+            }
+        }
+
+
+        /*******************************************************************/
+
+
+        // 5. Ejercicio 2
+        function styleNombre(){
+            var nombre = prompt("Dime tu nombre");
+            let titulo = document.getElementById("titulo");
+		    titulo.innerHTML = "La página de " + nombre;
+            
+            if(nombre === "fulanito"){
+                rojo.style.visibility = 'visible';
+            }else{
+                rojo.style.visibility = 'hidden';
+            }
+        }
+
+        function cambiarColor(){
+                document.getElementById("titulo").style.color = "red"; 
+        }
+
+        // 7. Ejercicio 2
+        
+        function selectColor(){
+            var color = document.getElementById("color");
+            var fondo = document.getElementById("fondo");
+            
+            if(color.value == "red"){
+                fondo.style.backgroundColor = "red";
+            }
+            if(color.value == "green"){
+                fondo.style.backgroundColor = "green";
+            }
+            if(color.value == "yellow"){
+                fondo.style.backgroundColor = "yellow";
+            }
+            if(color.value == "blue"){
+                fondo.style.backgroundColor = "blue";
+            }
+        }
+    
+
+        /*******************************************************************/
+        
+        
+        //11. Ejercicio 3.
+        function validarFormulario(){
+            let nombre=document.getElementById("nombre");
+            let edad=document.getElementById("edad");
+            let importe=document.getElementById("importe");
+            let situacion=document.getElementById("situacion");
+            aviso.innerHTML = "";
+            
+            if (nombre.value==""){
+                aviso.innerHTML = "El nombre no puede estar vacio";
+				return false;
+			}
+
+            if (edad.value>65){
+                aviso.innerHTML = "Debes ser menor de 65";
+				return false;
+			}else if(edad.value==""){
+                aviso.innerHTML = "El campo no puede estar vacio";
+                return false
+            }
+
+            if (importe.value<10000){
+                aviso.innerHTML = "Mayor de 10000";
+				return false;
+			}
+
+            if (situacion.value=="noseleccionado"){
+                aviso.innerHTML = "Debes elegir una Situación Laboral";
+				return false;
+			}
+
+            alert("Datos correctos. Procedo a enviar")
+            return true;
+
+        }
+
+    </script>
+
+</body>
+</html>
